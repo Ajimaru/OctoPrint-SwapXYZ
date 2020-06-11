@@ -3,7 +3,11 @@ from __future__ import absolute_import
 
 import octoprint.plugin
 
-class SwapXYPlugin(octoprint.plugin.OctoPrintPlugin):
+class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlugin):
+	config_version_key = "0.2.0"
+
+	other = dict(X="Y", Y="X")
+
 	def on_plugin_enabled(self):
 		pass
 
@@ -27,18 +31,48 @@ class SwapXYPlugin(octoprint.plugin.OctoPrintPlugin):
 			)
 		)
 
+	def get_settings_defaults(self):
+		return dict(
+			reverse=dict(
+				X=False,
+				Y=False,
+			)
+		)
+
+	def get_template_configs(self):
+		return [
+			dict(type="settings", custom_bindings=False),
+		]
+
 	def rewrite_jog(self, comm_instance, phase, cmd, cmd_type, gcode, subcode=None, tags=None, *args, **kwargs):
 		"""
 		Replace X with Y or Y with X in gcode initiated by jog commands.
 		"""
 		if "trigger:printer.jog" not in tags:
+			# Ignore normal gcode commands, only affect control buttons
 			return
 
-		if "X" in cmd:
-			cmd = cmd.replace("X", "Y")
-		elif "Y" in cmd:
-			cmd = cmd.replace("Y", "X")
+		for axis in ["X", "Y"]:
+			if axis in cmd:
+				# Swap to other axis
+				new_axis = self.other[axis]
+				cmd = cmd.replace(axis, new_axis)
 
+				# Reverse direction if configured
+				if self._settings.get_boolean(["reverse", new_axis]):
+					negative = new_axis + "-"
+
+					self._logger.info("reversing " + new_axis + ": " + cmd)
+
+					if negative in cmd:
+						cmd = cmd.replace(negative, new_axis)
+					elif new_axis in cmd:
+						cmd = cmd.replace(new_axis, negative)
+
+					self._logger.info("done: " + cmd)
+			
+				# Don't switch it back by iterating again
+				break
 		return cmd,
 
 __plugin_pythoncompat__ = ">=2.7,<4" # python 2 and 3
