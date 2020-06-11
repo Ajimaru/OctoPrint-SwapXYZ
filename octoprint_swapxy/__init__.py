@@ -62,14 +62,10 @@ class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlu
 				if self._settings.get_boolean(["reverse", new_axis]):
 					negative = new_axis + "-"
 
-					self._logger.info("reversing " + new_axis + ": " + cmd)
-
 					if negative in cmd:
 						cmd = cmd.replace(negative, new_axis)
 					elif new_axis in cmd:
 						cmd = cmd.replace(new_axis, negative)
-
-					self._logger.info("done: " + cmd)
 			
 				# Don't switch it back by iterating again
 				break
