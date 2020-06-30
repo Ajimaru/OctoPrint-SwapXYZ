@@ -27,7 +27,7 @@ plugin_author = "Andy Castille"
 plugin_author_email = "andy.castille@wolframmfg.com"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/klikini/OctoPrint-SwapXY"
+plugin_url = "https://gitlab.com/wolframmfg/octoprint-swapxy"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "AGPLv3"

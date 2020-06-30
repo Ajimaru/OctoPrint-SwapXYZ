@@ -20,14 +20,14 @@ class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlu
 				displayName="SwapXY",
 				displayVersion=self._plugin_version,
 
-				# version check: github repository
-				type="github_release",
-				user="klikini",
+				# version check: gitlab repository
+				type="gitlab_release",
+				user="wolframmfg",
 				repo="OctoPrint-SwapXY",
 				current=self._plugin_version,
 
 				# update method: pip
-				pip="https://github.com/klikini/OctoPrint-SwapXY/archive/{target_version}.zip"
+				pip="https://gitlab.com/wolframmfg/octoprint-swapxy/-/archive/{target_version}/octoprint-swapxy-{target_version}.zip"
 			)
 		)
 
