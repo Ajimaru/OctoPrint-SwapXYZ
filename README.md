@@ -1,6 +1,6 @@
 # SwapXY
 
-Swap the X and Y axes used by the jog controls.
+An OctoPrint plugin to swap the X and Y axes used by the jog controls.
 
 ## Setup
 

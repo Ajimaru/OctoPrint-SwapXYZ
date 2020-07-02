@@ -73,12 +73,17 @@ except:
 	import sys
 	sys.exit(-1)
 
+with open("README.md", "r") as readme:
+	long_description = readme.read()
+
 setup_parameters = octoprint_setuptools.create_plugin_setup_parameters(
 	identifier=plugin_identifier,
 	package=plugin_package,
 	name=plugin_name,
 	version=plugin_version,
 	description=plugin_description,
+	long_description=long_description,
+	long_description_content_type="text/markdown",
 	author=plugin_author,
 	mail=plugin_author_email,
 	url=plugin_url,
@@ -86,7 +91,12 @@ setup_parameters = octoprint_setuptools.create_plugin_setup_parameters(
 	requires=plugin_requires,
 	additional_packages=plugin_additional_packages,
 	ignored_packages=plugin_ignored_packages,
-	additional_data=plugin_additional_data
+	additional_data=plugin_additional_data,
+	classifiers=[
+		"Programming Language :: Python :: 3",
+		"License :: OSI Approved :: GPLv3",
+		"Operating System :: OS Independent",
+	],
 )
 
 if len(additional_setup_parameters):

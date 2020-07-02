@@ -1,0 +1,16 @@
+build_wheel:
+  stage: build
+  image: python:3
+  script:
+    - python3 -m pip install --user --upgrade setuptools wheel
+    - python3 setup.py sdist bdist_wheel
+  artifacts:
+    paths:
+      - dist/
+
+dist_wheel:
+  stage: deploy
+  image: python:3
+  script:
+    - python3 -m pip install --user --upgrade twine
+    - python3 -m twine upload -u __token__ dist/*

@@ -20,10 +20,9 @@ class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlu
 				displayName="SwapXY",
 				displayVersion=self._plugin_version,
 
-				# version check: gitlab repository
-				type="gitlab_release",
-				user="wolframmfg",
-				repo="OctoPrint-SwapXY",
+				# version check: PyPI
+				type="pypi_release",
+				package="swapxy",
 				current=self._plugin_version,
 
 				# update method: pip
