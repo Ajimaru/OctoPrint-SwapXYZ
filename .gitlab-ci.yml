@@ -8,7 +8,7 @@ build_wheel:
     - pushd ..
     - git clone https://github.com/foosel/OctoPrint
     - pushd OctoPrint
-    - virtualenv venv
+    - python3 -m virtualenv venv
     - source venv/bin/activate
     - python3 -m pip install -e .[develop,plugins]
     - popd -2
