@@ -1,10 +1,9 @@
 build_wheel:
   stage: build
-  image: python:3
+  image: python:3.7
   script:
     # Install dependencies
-    - apt-get install -y git
-    - python3 -m pip install --user --upgrade setuptools wheel
+    - python3 -m pip install --user --upgrade virtualenv setuptools wheel
     # Install OctoPrint
     - pushd ..
     - git clone https://github.com/foosel/OctoPrint

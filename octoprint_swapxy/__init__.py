@@ -26,7 +26,7 @@ class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlu
 				current=self._plugin_version,
 
 				# update method: pip
-				pip="https://gitlab.com/wolframmfg/octoprint-swapxy/-/archive/{target_version}/octoprint-swapxy-{target_version}.zip"
+				pip="swapxy"
 			)
 		)
 
