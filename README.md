@@ -26,3 +26,9 @@ plugins:
             X: false
             Y: false
 ```
+
+---
+
+Developed by
+
+[![Wolfram Manufacturing](wolframmfg.png)](https://wolframmfg.com/)
