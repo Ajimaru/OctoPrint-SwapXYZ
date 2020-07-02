@@ -67,9 +67,16 @@ additional_setup_parameters = dict(
 	long_description=long_description(),
 	long_description_content_type="text/markdown",
 	classifiers=[
-		"Programming Language :: Python :: 3",
-		"License :: OSI Approved :: GPLv3",
+		"Development Status :: 5 - Production/Stable",
+		"Environment :: Plugins",
+		"Intended Audience :: End Users/Desktop",
+		"Intended Audience :: Manufacturing",
+		"Intended Audience :: Science/Research",
+		"License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+		"Natural Language :: English",
 		"Operating System :: OS Independent",
+		"Programming Language :: Python",
+		"Topic :: Scientific/Engineering",
 	],
 )
 

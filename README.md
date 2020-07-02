@@ -31,4 +31,4 @@ plugins:
 
 Developed by
 
-[![Wolfram Manufacturing](wolframmfg.png)](https://wolframmfg.com/)
+[![Wolfram Manufacturing](https://gitlab.com/wolframmfg/octoprint-swapxy/-/raw/main/wolframmfg.png)](https://wolframmfg.com/)
