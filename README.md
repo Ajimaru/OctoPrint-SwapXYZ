@@ -4,9 +4,7 @@ An OctoPrint plugin to swap the X and Y axes used by the jog controls.
 
 ## Setup
 
-Install via the plugin manager using this URL:
-
-    https://gitlab.com/wolframmfg/octoprint-swapxy/-/archive/main/octoprint-swapxy-main.zip
+Install via the plugin manager by searching for [SwapXY](https://plugins.octoprint.org/plugins/swapxy/).
 
 As long as the plugin is enabled, the jog buttons for X and Y will
 drive the other axis instead.
@@ -26,6 +24,12 @@ plugins:
             X: false
             Y: false
 ```
+
+# Advanced
+
+Archive URL: https://gitlab.com/wolframmfg/octoprint-swapxy/-/archive/main/octoprint-swapxy-main.zip
+
+PyPI package: https://pypi.org/project/SwapXY/
 
 ---
 
