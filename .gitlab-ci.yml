@@ -1,6 +1,6 @@
 build_wheel:
   stage: build
-  image: python:3.7
+  image: python:3
   script:
     # Install dependencies
     - python3 -m pip install --user --upgrade virtualenv setuptools wheel
@@ -21,6 +21,8 @@ build_wheel:
 dist_wheel:
   stage: deploy
   image: python:3
+  only:
+    - main
   script:
     - python3 -m pip install --user --upgrade twine
     - python3 -m twine upload -u __token__ dist/*

@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import octoprint.plugin
 
 class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlugin):
-	config_version_key = "0.2.0"
+	config_version_key = "0.3.0"
 
 	other = dict(X="Y", Y="X")
 
@@ -35,7 +35,8 @@ class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlu
 			reverse=dict(
 				X=False,
 				Y=False,
-			)
+			),
+			swap=True
 		)
 
 	def get_template_configs(self):
@@ -53,9 +54,13 @@ class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlu
 
 		for axis in ["X", "Y"]:
 			if axis in cmd:
-				# Swap to other axis
-				new_axis = self.other[axis]
-				cmd = cmd.replace(axis, new_axis)
+				if self._settings.get_boolean(["swap"]):
+					# Swap to other axis
+					new_axis = self.other[axis]
+					cmd = cmd.replace(axis, new_axis)
+				else:
+					# Do not swap
+					new_axis = axis
 
 				# Reverse direction if configured
 				if self._settings.get_boolean(["reverse", new_axis]):
