@@ -19,12 +19,13 @@
             {{ _("For example, If swapping is enabled and you reverse X movements, then your printer's X axis will move the opposite direction from the Y axis button you click in OctoPrint.") }}
         </div>
         <div class="controls">
-            {% for axis in ["X", "Y"] %}
+            {% for axis in ["X", "Y", "Z"] %}
             <label class="checkbox">
                 <input type="checkbox" data-bind="checked: settings.plugins.swapxyz.reverse.{{ axis }}">
-                {{ _("Reverse " + axis + " jog movements") }}
+                {{ _("Reverse %(axis)s jog movements", axis=axis) }}
             </label>
             {% endfor %}
         </div>
+        <p><small>{{ _("The Z axis is never swapped, so reversing it always affects the Z button you click in OctoPrint.") }}</small></p>
     </div>
 </form>
