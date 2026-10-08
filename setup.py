@@ -4,14 +4,14 @@
 ### Do not forget to adjust the following variables to your own plugin.
 
 # The plugin's identifier, has to be unique
-plugin_identifier = "swapxy"
+plugin_identifier = "swapxyz"
 
 # The plugin's python package, should be "octoprint_<plugin identifier>", has to be unique
-plugin_package = "octoprint_swapxy"
+plugin_package = "octoprint_swapxyz"
 
 # The plugin's human readable name. Can be overwritten within OctoPrint's internal data via __plugin_name__ in the
 # plugin module
-plugin_name = "SwapXY"
+plugin_name = "SwapXYZ"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
 plugin_version = "0.3.0"
@@ -27,7 +27,7 @@ plugin_author = "Andy Castille"
 plugin_author_email = "andy.castille@wolframmfg.com"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://gitlab.com/wolframmfg/octoprint-swapxy"
+plugin_url = "https://github.com/Ajimaru/OctoPrint-SwapXYZ"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "GPLv3"
