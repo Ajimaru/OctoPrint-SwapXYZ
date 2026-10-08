@@ -36,6 +36,7 @@ class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePl
 			reverse=dict(
 				X=False,
 				Y=False,
+				Z=False,
 			),
 			swap=True
 		)
@@ -45,9 +46,15 @@ class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePl
 			dict(type="settings", custom_bindings=False),
 		]
 
+	def is_template_autoescaped(self):
+		# Our template only renders translated text and static markup, so
+		# autoescaping is safe. Required as of OctoPrint 2.1.0.
+		return True
+
 	def rewrite_jog(self, comm_instance, phase, cmd, cmd_type, gcode, subcode=None, tags=None, *args, **kwargs):
 		"""
-		Replace X with Y or Y with X in gcode initiated by jog commands.
+		Replace X with Y or Y with X in gcode initiated by jog commands, and
+		reverse the direction of any axis configured for it.
 		"""
 		if "trigger:printer.jog" not in tags:
 			# Ignore normal gcode commands, only affect control buttons
@@ -63,18 +70,32 @@ class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePl
 					# Do not swap
 					new_axis = axis
 
-				# Reverse direction if configured
-				if self._settings.get_boolean(["reverse", new_axis]):
-					negative = new_axis + "-"
+				cmd = self.reverse_axis(cmd, new_axis)
 
-					if negative in cmd:
-						cmd = cmd.replace(negative, new_axis)
-					elif new_axis in cmd:
-						cmd = cmd.replace(new_axis, negative)
-			
 				# Don't switch it back by iterating again
 				break
+		else:
+			# Z is never swapped, it has no partner axis, so only reverse it
+			if "Z" in cmd:
+				cmd = self.reverse_axis(cmd, "Z")
+
 		return cmd,
+
+	def reverse_axis(self, cmd, axis):
+		"""
+		Flip the sign of the given axis in cmd, if it is configured for reversal.
+		"""
+		if not self._settings.get_boolean(["reverse", axis]):
+			return cmd
+
+		negative = axis + "-"
+
+		if negative in cmd:
+			cmd = cmd.replace(negative, axis)
+		elif axis in cmd:
+			cmd = cmd.replace(axis, negative)
+
+		return cmd
 
 __plugin_pythoncompat__ = ">=2.7,<4" # python 2 and 3
 

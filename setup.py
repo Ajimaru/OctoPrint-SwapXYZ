@@ -14,11 +14,11 @@ plugin_package = "octoprint_swapxyz"
 plugin_name = "SwapXYZ"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.3.0"
+plugin_version = "0.4.0"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
-plugin_description = """Swap and/or reverse the X and Y axes used by the jog controls"""
+plugin_description = """Swap the X and Y axes used by the jog controls, and/or reverse the X, Y or Z axis"""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
 plugin_author = "Andy Castille"
