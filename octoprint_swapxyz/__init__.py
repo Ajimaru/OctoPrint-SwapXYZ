@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import octoprint.plugin
 
-class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlugin):
+class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlugin):
 	config_version_key = "0.3.0"
 
 	other = dict(X="Y", Y="X")
@@ -16,17 +16,18 @@ class SwapXYPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlu
 
 	def get_update_information(self):
 		return dict(
-			swapxy=dict(
-				displayName="SwapXY",
+			swapxyz=dict(
+				displayName="SwapXYZ",
 				displayVersion=self._plugin_version,
 
-				# version check: PyPI
-				type="pypi_release",
-				package="swapxy",
+				# version check: GitHub releases
+				type="github_release",
+				user="Ajimaru",
+				repo="OctoPrint-SwapXYZ",
 				current=self._plugin_version,
 
 				# update method: pip
-				pip="swapxy"
+				pip="https://github.com/Ajimaru/OctoPrint-SwapXYZ/archive/{target_version}.zip"
 			)
 		)
 
@@ -79,7 +80,7 @@ __plugin_pythoncompat__ = ">=2.7,<4" # python 2 and 3
 
 def __plugin_load__():
 	global __plugin_implementation__
-	__plugin_implementation__ = SwapXYPlugin()
+	__plugin_implementation__ = SwapXYZPlugin()
 
 	global __plugin_hooks__
 	__plugin_hooks__ = {

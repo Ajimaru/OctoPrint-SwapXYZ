@@ -1,13 +1,13 @@
 <form class="form-horizontal">
     <div class="control-group">
-        <h2>SwapXY</h2>
+        <h2>SwapXYZ</h2>
         <hr>
 
         <h3>Swap</h3>
         <p>{{ _("Uncheck the box below to disable this plugin's core functionality.") }}</p>        
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" data-bind="checked: settings.plugins.swapxy.swap">
+                <input type="checkbox" data-bind="checked: settings.plugins.swapxyz.swap">
                 {{ _("Swap X and Y movements") }}
             </label>
         </div>
@@ -21,7 +21,7 @@
         <div class="controls">
             {% for axis in ["X", "Y"] %}
             <label class="checkbox">
-                <input type="checkbox" data-bind="checked: settings.plugins.swapxy.reverse.{{ axis }}">
+                <input type="checkbox" data-bind="checked: settings.plugins.swapxyz.reverse.{{ axis }}">
                 {{ _("Reverse " + axis + " jog movements") }}
             </label>
             {% endfor %}
