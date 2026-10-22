@@ -1,12 +1,17 @@
 # coding=utf-8
 from __future__ import absolute_import
 
+import re
+
 import octoprint.plugin
 
 class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlugin):
 	config_version_key = "0.3.0"
 
 	other = dict(X="Y", Y="X")
+	number_pattern = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
+	axis_pattern = re.compile(r"([XYZ])(" + number_pattern + r")")
+	feedrate_pattern = re.compile(r"F(" + number_pattern + r")")
 
 	def on_plugin_enabled(self):
 		pass
@@ -56,28 +61,34 @@ class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePl
 		Replace X with Y or Y with X in gcode initiated by jog commands, and
 		reverse the direction of any axis configured for it.
 		"""
-		if "trigger:printer.jog" not in tags:
+		if not tags or "trigger:printer.jog" not in tags:
 			# Ignore normal gcode commands, only affect control buttons
 			return
 
-		for axis in ["X", "Y"]:
-			if axis in cmd:
-				if self._settings.get_boolean(["swap"]):
-					# Swap to other axis
-					new_axis = self.other[axis]
-					cmd = cmd.replace(axis, new_axis)
-				else:
-					# Do not swap
-					new_axis = axis
+		swap = self._settings.get_boolean(["swap"])
+		target_axes = set()
 
-				cmd = self.reverse_axis(cmd, new_axis)
+		def rewrite_axis(match):
+			axis, value = match.groups()
+			new_axis = self.other.get(axis, axis) if swap else axis
+			target_axes.add(new_axis)
+			return self.reverse_axis(new_axis + value, new_axis)
 
-				# Don't switch it back by iterating again
-				break
-		else:
-			# Z is never swapped, it has no partner axis, so only reverse it
-			if "Z" in cmd:
-				cmd = self.reverse_axis(cmd, "Z")
+		# Rewrite each original word once, so X and Y cannot overwrite each other.
+		cmd = self.axis_pattern.sub(rewrite_axis, cmd)
+
+		if swap and target_axes.intersection(self.other):
+			# OctoPrint chose F for the original axes. Respect the destination
+			# profile speeds as well, while preserving slower requested speeds.
+			profile = self._printer_profile_manager.get_current_or_default()
+			max_speed = min(profile["axes"][axis.lower()]["speed"] for axis in target_axes)
+
+			def limit_feedrate(match):
+				if float(match.group(1)) > max_speed:
+					return "F{}".format(max_speed)
+				return match.group(0)
+
+			cmd = self.feedrate_pattern.sub(limit_feedrate, cmd)
 
 		return cmd,
 
@@ -92,6 +103,8 @@ class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePl
 
 		if negative in cmd:
 			cmd = cmd.replace(negative, axis)
+		elif axis + "+" in cmd:
+			cmd = cmd.replace(axis + "+", negative)
 		elif axis in cmd:
 			cmd = cmd.replace(axis, negative)
 

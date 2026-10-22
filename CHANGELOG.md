@@ -1,3 +1,9 @@
+# Unreleased
+
+Fix swapping and reversal for jog commands that move multiple axes together.
+
+Limit swapped jog feed rates to the destination axes' configured profile speeds.
+
 # 0.4.0
 
 Add an option to reverse the Z axis, for printers whose bed moves on Z
