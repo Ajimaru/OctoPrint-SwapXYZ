@@ -56,7 +56,7 @@ class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePl
 		Replace X with Y or Y with X in gcode initiated by jog commands, and
 		reverse the direction of any axis configured for it.
 		"""
-		if "trigger:printer.jog" not in tags:
+		if "trigger:printer.jog" not in (tags or ()):
 			# Ignore normal gcode commands, only affect control buttons
 			return
 
@@ -97,7 +97,7 @@ class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePl
 
 		return cmd
 
-__plugin_pythoncompat__ = ">=2.7,<4" # python 2 and 3
+__plugin_pythoncompat__ = ">=3.7,<4" # Python 3 only, matching OctoPrint 1.11.8+
 
 def __plugin_load__():
 	global __plugin_implementation__

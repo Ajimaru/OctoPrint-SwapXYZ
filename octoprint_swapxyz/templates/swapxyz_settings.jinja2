@@ -1,10 +1,10 @@
 <form class="form-horizontal">
     <div class="control-group">
-        <h2>SwapXYZ</h2>
+        <h2><img src="{{ url_for('plugin_swapxyz.static', filename='img/swapxyz.svg') }}" alt="" width="24" height="24"> SwapXYZ</h2>
         <hr>
 
         <h3>Swap</h3>
-        <p>{{ _("Uncheck the box below to disable this plugin's core functionality.") }}</p>        
+        <p>{{ _("Uncheck the box below to disable this plugin's core functionality.") }}</p>
         <div class="controls">
             <label class="checkbox">
                 <input type="checkbox" data-bind="checked: settings.plugins.swapxyz.swap">

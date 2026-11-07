@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="SwapXYZ plugin icon">
+  <title>SwapXYZ</title>
+  <defs>
+    <radialGradient id="bg-grad" cx="30%" cy="70%" r="85%">
+      <stop offset="0%" stop-color="#161c23"/>
+      <stop offset="55%" stop-color="#080a0d"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+
+    <radialGradient id="origin-glow" gradientUnits="userSpaceOnUse" cx="18" cy="40" r="20">
+      <stop offset="0%" stop-color="#6fb7ff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#6fb7ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="axis-x" gradientUnits="userSpaceOnUse" x1="18" y1="40" x2="46.6" y2="23.5">
+      <stop offset="0%" stop-color="#ff8a70"/>
+      <stop offset="40%" stop-color="#ff4d3d"/>
+      <stop offset="100%" stop-color="#4a0d07"/>
+    </linearGradient>
+    <linearGradient id="axis-y" gradientUnits="userSpaceOnUse" x1="18" y1="40" x2="46.6" y2="56.5">
+      <stop offset="0%" stop-color="#a6ff9a"/>
+      <stop offset="40%" stop-color="#38d94a"/>
+      <stop offset="100%" stop-color="#0b4a13"/>
+    </linearGradient>
+    <linearGradient id="axis-z" gradientUnits="userSpaceOnUse" x1="18" y1="40" x2="18" y2="7">
+      <stop offset="0%" stop-color="#a8d6ff"/>
+      <stop offset="40%" stop-color="#3a8dff"/>
+      <stop offset="100%" stop-color="#0a2a66"/>
+    </linearGradient>
+
+    <filter id="axis-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.1" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Black backdrop -->
+  <rect x="0" y="0" width="64" height="64" rx="13" fill="url(#bg-grad)"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="12.25" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1.5"/>
+  <circle cx="18" cy="40" r="20" fill="url(#origin-glow)"/>
+
+  <!-- X axis: from origin bottom-left towards top-right -->
+  <g filter="url(#axis-glow)">
+    <line x1="19.3" y1="39.3" x2="42.3" y2="26" stroke="url(#axis-x)" stroke-width="4.4" stroke-linecap="round"/>
+    <polygon points="46.6,23.5 43.05,29.36 39.75,23.64" fill="#7a1a10"/>
+  </g>
+
+  <!-- Y axis: from origin bottom-left towards bottom-right -->
+  <g filter="url(#axis-glow)">
+    <line x1="19.3" y1="40.7" x2="42.3" y2="54" stroke="url(#axis-y)" stroke-width="4.4" stroke-linecap="round"/>
+    <polygon points="46.6,56.5 39.75,56.36 43.05,50.64" fill="#115c1a"/>
+  </g>
+
+  <!-- Z axis: from origin bottom-left straight up -->
+  <g filter="url(#axis-glow)">
+    <line x1="18" y1="38.5" x2="18" y2="12" stroke="url(#axis-z)" stroke-width="4.4" stroke-linecap="round"/>
+    <polygon points="18,7 21.3,13 14.7,13" fill="#123a80"/>
+  </g>
+
+  <!-- Origin -->
+  <circle cx="18" cy="40" r="4" fill="#05070a"/>
+  <circle cx="18" cy="40" r="4" fill="none" stroke="#cfe4ff" stroke-opacity="0.55" stroke-width="1"/>
+  <circle cx="18" cy="40" r="1.8" fill="#e8f1ff"/>
+
+  <!-- Axis labels -->
+  <text x="52.5" y="20" font-family="monospace" font-size="7" font-weight="bold" fill="#ff7a66" text-anchor="start">X</text>
+  <text x="52.5" y="59.5" font-family="monospace" font-size="7" font-weight="bold" fill="#5cf06a" text-anchor="start">Y</text>
+  <text x="13" y="8.5" font-family="monospace" font-size="7" font-weight="bold" fill="#6aa9ff" text-anchor="end">Z</text>
+</svg>

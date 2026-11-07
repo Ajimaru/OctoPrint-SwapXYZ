@@ -1,0 +1,51 @@
+# Translations template for SwapXYZ.
+# Copyright (C) Ajimaru
+# This file is distributed under the same license as the SwapXYZ project.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SwapXYZ 0.4.1\n"
+"Report-Msgid-Bugs-To: https://github.com/Ajimaru/OctoPrint-SwapXYZ/issues\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: octoprint_swapxyz/templates/swapxyz_settings.jinja2:7
+msgid "Uncheck the box below to disable this plugin's core functionality."
+msgstr ""
+
+#: octoprint_swapxyz/templates/swapxyz_settings.jinja2:11
+msgid "Swap X and Y movements"
+msgstr ""
+
+#: octoprint_swapxyz/templates/swapxyz_settings.jinja2:16
+msgid "Check the boxes below to reverse movement of an axis."
+msgstr ""
+
+#: octoprint_swapxyz/templates/swapxyz_settings.jinja2:18
+msgid ""
+"Note that this applies to the axis sent to the printer, which changes "
+"when swapping is enabled."
+msgstr ""
+
+#: octoprint_swapxyz/templates/swapxyz_settings.jinja2:19
+msgid ""
+"For example, If swapping is enabled and you reverse X movements, then "
+"your printer's X axis will move the opposite direction from the Y axis "
+"button you click in OctoPrint."
+msgstr ""
+
+#: octoprint_swapxyz/templates/swapxyz_settings.jinja2:25
+#, python-format
+msgid "Reverse %(axis)s jog movements"
+msgstr ""
+
+#: octoprint_swapxyz/templates/swapxyz_settings.jinja2:29
+msgid ""
+"The Z axis is never swapped, so reversing it always affects the Z button "
+"you click in OctoPrint."
+msgstr ""
+

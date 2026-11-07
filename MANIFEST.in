@@ -1,4 +1,8 @@
 include README.md
+include LICENSE
+include requirements.txt
+include requirements-dev.txt
+include translations/messages.pot
 recursive-include octoprint_swapxyz/templates *
 recursive-include octoprint_swapxyz/translations *
 recursive-include octoprint_swapxyz/static *

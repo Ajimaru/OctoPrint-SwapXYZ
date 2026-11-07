@@ -14,17 +14,17 @@ plugin_package = "octoprint_swapxyz"
 plugin_name = "SwapXYZ"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.4.0"
+plugin_version = "0.4.1"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
 plugin_description = """Swap the X and Y axes used by the jog controls, and/or reverse the X, Y or Z axis"""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
-plugin_author = "Andy Castille"
+plugin_author = "Ajimaru, work based on Andy Castille"
 
 # The plugin's author's mail address.
-plugin_author_email = "andy.castille@wolframmfg.com"
+plugin_author_email = "Ajimaru@users.noreply.github.com"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
 plugin_url = "https://github.com/Ajimaru/OctoPrint-SwapXYZ"
@@ -33,7 +33,7 @@ plugin_url = "https://github.com/Ajimaru/OctoPrint-SwapXYZ"
 plugin_license = "GPLv3"
 
 # Any additional requirements besides OctoPrint should be listed here
-plugin_requires = []
+plugin_requires = ["OctoPrint>=1.11.8"]
 
 ### --------------------------------------------------------------------------------------------------------------------
 ### More advanced options that you usually shouldn't have to touch follow after this point
@@ -66,6 +66,8 @@ def long_description():
 additional_setup_parameters = dict(
 	long_description=long_description(),
 	long_description_content_type="text/markdown",
+	# OctoPrint 1.11.8 itself requires Python 3.7 or newer
+	python_requires=">=3.7,<4",
 	classifiers=[
 		"Development Status :: 5 - Production/Stable",
 		"Environment :: Plugins",
@@ -76,6 +78,15 @@ additional_setup_parameters = dict(
 		"Natural Language :: English",
 		"Operating System :: OS Independent",
 		"Programming Language :: Python",
+		"Programming Language :: Python :: 3",
+		"Programming Language :: Python :: 3 :: Only",
+		"Programming Language :: Python :: 3.7",
+		"Programming Language :: Python :: 3.8",
+		"Programming Language :: Python :: 3.9",
+		"Programming Language :: Python :: 3.10",
+		"Programming Language :: Python :: 3.11",
+		"Programming Language :: Python :: 3.12",
+		"Programming Language :: Python :: 3.13",
 		"Topic :: Scientific/Engineering",
 	],
 )
