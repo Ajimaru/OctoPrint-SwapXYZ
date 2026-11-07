@@ -89,7 +89,7 @@ Upstream project: https://gitlab.com/wolframmfg/octoprint-swapxy
 ```bash
 python -m pip install "OctoPrint==1.11.8"
 python -m pip install -r requirements-dev.txt
-python -m pip install -e .
+python -m pip install --no-build-isolation -e .
 python -m pytest
 ```
 

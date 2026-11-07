@@ -5,8 +5,12 @@
 ```bash
 python -m pip install "OctoPrint==1.11.8"
 python -m pip install -r requirements-dev.txt
-python -m pip install -e .
+python -m pip install --no-build-isolation -e .
 ```
+
+The `--no-build-isolation` flag is required: the plugin builds with
+`octoprint_setuptools`, which comes from OctoPrint and is therefore missing in
+pip's isolated build environment.
 
 ## Tests
 
