@@ -1,0 +1,63 @@
+name: Bug report
+description: Something does not work as expected
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please include the OctoPrint systeminfo bundle and
+        the relevant log lines, otherwise the issue is hard to reproduce.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the expected and the actual behaviour.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Enable swapping
+        2. Click the X+ jog button
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: octoprint-version
+    attributes:
+      label: OctoPrint version
+      placeholder: "1.11.8"
+    validations:
+      required: true
+  - type: input
+    id: plugin-version
+    attributes:
+      label: SwapXYZ version
+      placeholder: "0.4.1"
+    validations:
+      required: true
+  - type: input
+    id: connection
+    attributes:
+      label: Connection
+      description: Serial, Moonraker or Bambu Connector?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log excerpt
+      description: Relevant lines from octoprint.log, if available.
+      render: shell
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched the existing issues and found no duplicate.
+          required: true
+        - label: I run the latest SwapXYZ release.
+          required: true
