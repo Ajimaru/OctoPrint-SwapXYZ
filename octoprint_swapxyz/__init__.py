@@ -3,7 +3,15 @@ from __future__ import absolute_import
 
 import octoprint.plugin
 
-class SwapXYZPlugin(octoprint.plugin.SettingsPlugin, octoprint.plugin.TemplatePlugin):
+# AssetPlugin is needed even though the plugin ships no JS/CSS: OctoPrint only
+# registers the static route (endpoint "plugin.swapxyz.static") for plugins
+# implementing it. Without it the settings icon's url_for() raised a BuildError
+# and the whole settings pane was replaced by an error (0.4.1).
+class SwapXYZPlugin(
+	octoprint.plugin.SettingsPlugin,
+	octoprint.plugin.AssetPlugin,
+	octoprint.plugin.TemplatePlugin,
+):
 	config_version_key = "0.3.0"
 
 	other = dict(X="Y", Y="X")
