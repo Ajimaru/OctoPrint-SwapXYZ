@@ -1,3 +1,7 @@
+# 0.4.2
+
+Fix the settings dialog, which showed an error instead of the plugin's settings since 0.4.1 (the icon pointed at a static route the plugin never registered)
+
 # 0.4.1
 
 Require OctoPrint 1.11.8 and Python 3.7
