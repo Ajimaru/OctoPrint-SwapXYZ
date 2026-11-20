@@ -10,12 +10,30 @@ permissions:
 
 jobs:
   release:
-    name: Build & publish release
+    name: Build & draft release
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # The trigger accepts any tag, so this is the only thing standing between a
+      # stray or mistyped tag and a release whose version disagrees with the code.
+      # OctoPrint's software update compares against plugin_version in setup.py.
+      # A leading "v" in the tag is tolerated (existing tags have none).
+      - name: Check tag against plugin_version
+        env:
+          TAG_ID: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          PLUGIN_VERSION=$(grep -E '^plugin_version = ' setup.py | cut -d '"' -f2)
+          TAG_VERSION="${TAG_ID#v}"
+          echo "plugin_version in setup.py: $PLUGIN_VERSION"
+          echo "Version from tag:           $TAG_VERSION"
+          if [ "$PLUGIN_VERSION" != "$TAG_VERSION" ]; then
+            echo "::error::setup.py plugin_version ($PLUGIN_VERSION) does not match the pushed tag ($TAG_VERSION)"
+            exit 1
+          fi
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -33,9 +51,13 @@ jobs:
       - name: Build plugin manager archive
         run: git archive --format=zip --prefix=SwapXYZ/ -o dist/SwapXYZ-latest.zip HEAD
 
-      - name: Create GitHub release
+      # Always a draft, like the other plugin repos: a release is published by hand
+      # once the notes and the attached archives have been checked. Pushing a tag
+      # must never publish on its own (0.4.1 went live straight from the tag).
+      - name: Create GitHub release (draft)
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*
           fail_on_unmatched_files: true
           generate_release_notes: true
+          draft: true
